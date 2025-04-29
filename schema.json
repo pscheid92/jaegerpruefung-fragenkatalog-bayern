@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Fragenkatalog der Jägerprüfung in Bayern",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "sg": {
+        "type": "integer",
+        "minimum": 1,
+        "description": "Sachgebiets-Nummer"
+      },
+      "no": {
+        "type": "integer",
+        "minimum": 1,
+        "description": "Fortlaufende Nummer im Sachgebiet"
+      },
+      "topic": {
+        "type": "string",
+        "description": "Label im Format 'sg.no Thema'"
+      },
+      "question": {
+        "type": "string",
+        "description": "Fragetext (Plain-Text/Markdown)"
+      },
+      "answers": {
+        "type": "array",
+        "minItems": 2,
+        "description": "Antwortmöglichkeiten",
+        "items": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string"
+            },
+            "correct": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "text",
+            "correct"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "sg",
+      "no",
+      "topic",
+      "question",
+      "answers"
+    ],
+    "additionalProperties": false
+  }
+}

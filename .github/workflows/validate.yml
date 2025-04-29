@@ -1,0 +1,25 @@
+name: validate-json
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    paths: [ 'fragenkatalog.json', 'schema.json', '.github/workflows/validate.yml', 'scripts/validate.py' ]
+
+jobs:
+  schema-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install jsonschema
+        run: pip install jsonschema
+
+      - name: Run schema validation
+        run: python scripts/validate.py --file fragenkatalog.json --schema schema.json
